@@ -1,6 +1,6 @@
 // service/baccaratService.js
 // URL API LỊCH SỬ GAME (Sử dụng tên miền mới của Server Backend)
-const GAME_HISTORY_API = 'https://memaybeo-49ip.onrender.com/api/game/history'; 
+const GAME_HISTORY_API = 'https://vh-57bx.onrender.com/api/game/history'; 
 
 let lastPrediction = { 
     prediction: 'WAIT', 
