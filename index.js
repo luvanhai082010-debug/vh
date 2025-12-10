@@ -1,36 +1,34 @@
-// index.js
+// index.js (Phiên bản TỐI GIẢN - Loại trừ lỗi Routes)
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const { connectDB } = require('./db'); // Đảm bảo đường dẫn này đúng: ./db
+const { connectDB } = require('./db'); 
 
 dotenv.config();
 const app = express();
 
 // --- MIDDLEWARE ---
-// [1] Quan trọng: Middleware này phải nằm trên các route để đọc Body JSON
+// Middleware đọc Body JSON (quan trọng để tránh lỗi 400)
 app.use(express.json()); 
 app.use(cors()); 
 
-// [2] Kết nối Database (sẽ tự tạo file database.sqlite)
+// [TẠM THỜI VÔ HIỆU HÓA TẤT CẢ CÁC ROUTES]
+// const authRoutes = require('./routes/auth'); 
+// const adminRoutes = require('./routes/admin'); 
+// const gameRoutes = require('./routes/game'); 
+// const toolRoutes = require('./routes/tool'); 
+
+// app.use('/api/auth', authRoutes); 
+// app.use('/api/admin', adminRoutes);
+// app.use('/api/game', gameRoutes);
+// app.use('/api/tool', toolRoutes); 
+
+// [CHỈ KẾT NỐI DATABASE VÀ CHẠY ROUTE GỐC]
 connectDB(); 
 
-// --- ROUTES ---
-// [3] Require các file Route
-const authRoutes = require('./routes/auth'); 
-const adminRoutes = require('./routes/admin'); 
-const gameRoutes = require('./routes/game'); 
-const toolRoutes = require('./routes/tool'); 
-
-// [4] Định nghĩa các API Endpoint
-app.use('/api/auth', authRoutes); 
-app.use('/api/admin', adminRoutes);
-app.use('/api/game', gameRoutes);
-app.use('/api/tool', toolRoutes); 
-
-// [5] Route Gốc (Health Check)
+// Route Gốc (Health Check) - Tuyến đường duy nhất còn lại
 app.get('/', (req, res) => {
-    res.send('Baccarat Admin API Server đang hoạt động với SQLite!');
+    res.send('Baccarat Admin API Server đang hoạt động với SQLite! (Tối giản)');
 });
 
 // --- KHỞI ĐỘNG SERVER ---
